@@ -1,12 +1,12 @@
 class PlansController < ApplicationController
   before_filter :authorize, except: [:index, :show]
+  before_filter :load_plan, only: [:show, :edit, :update, :destroy]
 
   def index
     @plans = Plan.all
   end
 
   def show
-    @plan = Plan.find(params[:id])
   end
 
   def new
@@ -14,7 +14,6 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @plan = Plan.find(params[:id])
   end
 
   def create
@@ -28,8 +27,6 @@ class PlansController < ApplicationController
   end
 
   def update
-    @plan = Plan.find(params[:id])
-
     if @plan.update_attributes(params[:plan])
       redirect_to @plan, notice: 'Plan was successfully updated.'
     else
@@ -38,9 +35,14 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    @plan = Plan.find(params[:id])
     @plan.destroy
 
     redirect_to plans_url
+  end
+
+  private
+
+  def load_plan
+    @plan = Plan.find(params[:id])
   end
 end
