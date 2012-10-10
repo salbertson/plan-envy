@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Price</th>
     <th>Preview image</th>
     <th>Plan file</th>
     <th></th>
@@ -15,11 +16,12 @@
   <tr>
     <td><%= plan.name %></td>
     <td><%= plan.description %></td>
+    <td><%= number_to_currency plan.price %></td>
     <td><%= image_tag plan.preview_image.url(:thumb) %></td>
     <td><%= link_to "download", plan.plan_file.url %></td>
     <td><%= link_to 'Show', plan %></td>
-    <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
-    <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', edit_plan_path(plan) if signed_in? %></td>
+    <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } if signed_in? %></td>
   </tr>
 <% end %>
 </table>
