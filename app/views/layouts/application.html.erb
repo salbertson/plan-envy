@@ -12,5 +12,7 @@
 <% end -%>
 
 <%= yield %>
+
+<%= link_to "Sign Out", sign_out_path, method: :delete if signed_in? %>
 </body>
 </html>
