@@ -9,6 +9,7 @@ gem "sqlite3"
 gem "heroku"
 gem "paperclip", "~> 3.0"
 gem "clearance"
+gem "flutie"
 
 # Gems used only for assets and not required
 # in production environments by default.
