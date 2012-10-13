@@ -17,7 +17,7 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = Plan.new(params[:plan])
+    @plan = Plan.new(plan_params_with_publisher_id)
 
     if @plan.save
       redirect_to @plan, notice: 'Plan was successfully created.'
@@ -44,5 +44,9 @@ class PlansController < ApplicationController
 
   def load_plan
     @plan = Plan.find(params[:id])
+  end
+
+  def plan_params_with_publisher_id
+    params[:plan].merge(publisher_id: current_user.id)
   end
 end
